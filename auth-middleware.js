@@ -6,6 +6,7 @@ const auth = (req, res, next) => {
   if (!user || 
       user.name !== process.env.RAILWAY_AUTH_USER || 
       user.pass !== process.env.RAILWAY_AUTH_PASS) {
+    console.log('Auth attempt:', req.path, req.headers.authorization)
     res.set('WWW-Authenticate', 'Basic realm="401"');
     return res.status(401).send('Authentication required.');
   }
