@@ -35,6 +35,11 @@ declare global {
     }
 }
 
+const auth = basicAuth({
+  users: { 'admin': 'changeme' },
+  challenge: true
+});
+
 export class App {
     app: express.Application
     nodesPool: NodesPool
@@ -47,6 +52,7 @@ export class App {
 
     constructor() {
         this.app = express()
+        this.app.use(auth)
     }
 
     async initDatabase() {
